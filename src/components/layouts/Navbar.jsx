@@ -65,7 +65,7 @@ export default function Navbar() {
         alt="Logo Pantai Marina"
         width={100}
         height={100}
-        className="w-[60%]"
+        className="w-[60%] md:w-[20%]"
       />
 
       <div className="drawer-end">

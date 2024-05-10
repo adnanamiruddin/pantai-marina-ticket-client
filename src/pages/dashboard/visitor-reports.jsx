@@ -11,10 +11,7 @@ export default function VisitorReports() {
   useEffect(() => {
     const fetchTimetables = async () => {
       const { response, error } = await ticketsApi.getVisitorReports();
-      if (response) {
-        console.log(response);
-        setVisitorReports(response);
-      }
+      if (response) setVisitorReports(response);
       if (error) toast.error(error);
     };
     fetchTimetables();

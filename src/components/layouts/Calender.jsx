@@ -13,8 +13,12 @@ import { VscTriangleRight, VscTriangleLeft } from "react-icons/vsc";
 import ticketsApi from "@/api/modules/tickets.api";
 import { toast } from "react-toastify";
 import BookTicketModal from "./BookTicketModal";
+import { useSelector } from "react-redux";
+import { selectUser } from "@/redux/features/userSlice";
 
 export default function Calendar() {
+  const { user } = useSelector(selectUser);
+
   const [currentDate, setCurrentDate] = useState(new Date());
   const [timetables, setTimetables] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
@@ -29,6 +33,10 @@ export default function Calendar() {
   }, []);
 
   const handleDoubleClickDate = (dateClicked) => {
+    if (!user) {
+      toast.error("Silahkan login terlebih dahulu");
+      return;
+    }
     document.getElementById("book_ticket_modal").showModal();
     setSelectedDate(dateClicked);
   };
