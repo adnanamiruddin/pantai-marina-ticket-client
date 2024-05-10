@@ -59,6 +59,43 @@ export default function Navbar() {
   };
 
   return (
+    // <div className="bg-white text-black px-6 py-3 flex justify-between items-center fixed w-full shadow-lg z-50">
+    //   <div className="navbar-start">
+    //     <Image
+    //       src="/logo_with_text.png"
+    //       alt="Logo Pantai Marina"
+    //       width={100}
+    //       height={100}
+    //       className="w-full md:w-[40%]"
+    //     />
+    //   </div>
+    //   <div className="navbar-center hidden lg:flex">
+    //     <ul className="menu menu-horizontal px-1">
+    //       <li>
+    //         <a>Item 1</a>
+    //       </li>
+    //       <li>
+    //         <details>
+    //           <summary>Parent</summary>
+    //           <ul className="p-2">
+    //             <li>
+    //               <a>Submenu 1</a>
+    //             </li>
+    //             <li>
+    //               <a>Submenu 2</a>
+    //             </li>
+    //           </ul>
+    //         </details>
+    //       </li>
+    //       <li>
+    //         <a>Item 3</a>
+    //       </li>
+    //     </ul>
+    //   </div>
+    //   <div className="navbar-end">
+    //     <a className="btn">Button</a>
+    //   </div>
+    // </div>
     <div className="bg-white px-6 py-3 flex justify-between items-center fixed w-full shadow-lg z-50">
       <Image
         src="/logo_with_text.png"
@@ -68,7 +105,7 @@ export default function Navbar() {
         className="w-[60%] md:w-[20%]"
       />
 
-      <div className="drawer-end">
+      <div className="drawer-end md:hidden">
         <input id="navbar_drawer" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content">
           <label
@@ -152,6 +189,64 @@ export default function Navbar() {
             )}
           </ul>
         </div>
+      </div>
+
+      <div className="hidden md:flex text-black">
+        <ul className="menu menu-horizontal gap-4">
+          <li>
+            <Link
+              href="/"
+              onClick={handleDrawerClose}
+              className={`text-lg font-semibold focus:bg-orange-400 focus:text-black ${
+                router.pathname === "/" ? "bg-orange-400" : ""
+              }`}
+            >
+              Beranda
+            </Link>
+          </li>
+
+          {!user ? (
+            <>
+              {notLoggedInLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    onClick={handleDrawerClose}
+                    className={`text-lg font-semibold focus:bg-orange-400 focus:text-black ${
+                      router.pathname === link.href ? "bg-orange-400" : ""
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </>
+          ) : (
+            <>
+              {loggedInLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    onClick={handleDrawerClose}
+                    className={`text-lg font-semibold focus:bg-orange-400 focus:text-black ${
+                      router.pathname === link.href ? "bg-orange-400" : ""
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+              <li className="mt-auto">
+                <button
+                  onClick={handleLogout}
+                  className="text-lg font-semibold bg-red-600 text-white"
+                >
+                  Logout
+                </button>
+              </li>
+            </>
+          )}
+        </ul>
       </div>
     </div>
   );

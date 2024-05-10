@@ -76,8 +76,8 @@ export default function Register() {
   });
 
   return (
-    <div className="flex justify-center items-center pt-10 px-3">
-      <div className="w-full">
+    <div className="flex justify-center items-center pt-10 px-3 md:mx-64">
+      <div className="w-full md:p-24 md:rounded-md md:bg-gray-100 md:border-2 md:border-gray-300 md:shadow-lg">
         <h3 className="text-2xl font-semibold mb-1">Buat Akun</h3>
         <h5 className="mb-5">
           Sudah punya akun?{" "}

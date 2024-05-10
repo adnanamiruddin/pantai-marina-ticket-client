@@ -50,7 +50,7 @@ export default function TicketItem({ ticket }) {
   };
 
   return (
-    <div className="shadow-md border border-gray-200 p-4 rounded">
+    <div className="shadow-md border border-gray-200 p-4 rounded md:w-[32%]">
       <div className="flex justify-between items-center">
         <h2 className="font-bold text-3xl">Tiket</h2>
 

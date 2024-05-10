@@ -62,109 +62,113 @@ export default function Profile() {
 
   return (
     <ProtectedPage>
-      <h2 className="text-3xl font-bold mt-1 mb-3">Profil</h2>
+      <div className="md:mx-72 md:mt-10">
+        <h2 className="text-3xl font-bold mt-1 mb-3">Profil</h2>
 
-      <form
-        className="flex flex-col gap-3 items-center"
-        onSubmit={profileForm.handleSubmit}
-      >
-        <div className="flex gap-3">
-          <Input
-            label="Nama Depan"
-            name="firstName"
-            placeholder="Nama Depan"
-            type="text"
-            value={profileForm.values.firstName}
-            onChange={profileForm.handleChange}
-            error={
-              profileForm.touched.firstName &&
-              profileForm.errors.firstName !== undefined
-            }
-            helperText={
-              profileForm.touched.firstName && profileForm.errors.firstName
-            }
-          />
-          <Input
-            label="Nama Belakang"
-            name="lastName"
-            placeholder="Nama Belakang"
-            type="text"
-            value={profileForm.values.lastName}
-            onChange={profileForm.handleChange}
-            error={
-              profileForm.touched.lastName &&
-              profileForm.errors.lastName !== undefined
-            }
-            helperText={
-              profileForm.touched.lastName && profileForm.errors.lastName
-            }
-          />
-        </div>
-
-        <Input
-          label="Umur"
-          name="age"
-          placeholder="18"
-          type="number"
-          value={profileForm.values.age}
-          onChange={profileForm.handleChange}
-          error={
-            profileForm.touched.age && profileForm.errors.age !== undefined
-          }
-          helperText={profileForm.touched.age && profileForm.errors.age}
-        />
-        <Input
-          label="Asal Kota"
-          name="city"
-          placeholder="Makassar"
-          type="text"
-          value={profileForm.values.city}
-          onChange={profileForm.handleChange}
-          error={
-            profileForm.touched.city && profileForm.errors.city !== undefined
-          }
-          helperText={profileForm.touched.city && profileForm.errors.city}
-        />
-        <Input
-          label="Alamat"
-          name="address"
-          placeholder="Jl. Jendral Sudirman No. 1"
-          type="text"
-          value={profileForm.values.address}
-          onChange={profileForm.handleChange}
-          error={
-            profileForm.touched.address &&
-            profileForm.errors.address !== undefined
-          }
-          helperText={profileForm.touched.address && profileForm.errors.address}
-        />
-        <Input
-          label="Nomor (WA)"
-          name="phoneNumber"
-          placeholder="08123456789"
-          type="text"
-          value={profileForm.values.phoneNumber}
-          onChange={profileForm.handleChange}
-          error={
-            profileForm.touched.phoneNumber &&
-            profileForm.errors.phoneNumber !== undefined
-          }
-          helperText={
-            profileForm.touched.phoneNumber && profileForm.errors.phoneNumber
-          }
-        />
-
-        <div className="w-full mt-4">
-          <LoadingButton loading={isOnRequest}>Simpan</LoadingButton>
-        </div>
-
-        {errorMessage ? (
-          <div className="alert alert-error mt-4">
-            <MdErrorOutline />
-            <span>{errorMessage}</span>
+        <form
+          className="flex flex-col gap-3 items-center w-full md:px-20 md:py-8 md:mt-4 md:rounded-md md:bg-gray-100 md:border-2 md:border-gray-300 md:shadow-lg"
+          onSubmit={profileForm.handleSubmit}
+        >
+          <div className="flex gap-3 w-full">
+            <Input
+              label="Nama Depan"
+              name="firstName"
+              placeholder="Nama Depan"
+              type="text"
+              value={profileForm.values.firstName}
+              onChange={profileForm.handleChange}
+              error={
+                profileForm.touched.firstName &&
+                profileForm.errors.firstName !== undefined
+              }
+              helperText={
+                profileForm.touched.firstName && profileForm.errors.firstName
+              }
+            />
+            <Input
+              label="Nama Belakang"
+              name="lastName"
+              placeholder="Nama Belakang"
+              type="text"
+              value={profileForm.values.lastName}
+              onChange={profileForm.handleChange}
+              error={
+                profileForm.touched.lastName &&
+                profileForm.errors.lastName !== undefined
+              }
+              helperText={
+                profileForm.touched.lastName && profileForm.errors.lastName
+              }
+            />
           </div>
-        ) : null}
-      </form>
+
+          <Input
+            label="Umur"
+            name="age"
+            placeholder="18"
+            type="number"
+            value={profileForm.values.age}
+            onChange={profileForm.handleChange}
+            error={
+              profileForm.touched.age && profileForm.errors.age !== undefined
+            }
+            helperText={profileForm.touched.age && profileForm.errors.age}
+          />
+          <Input
+            label="Asal Kota"
+            name="city"
+            placeholder="Makassar"
+            type="text"
+            value={profileForm.values.city}
+            onChange={profileForm.handleChange}
+            error={
+              profileForm.touched.city && profileForm.errors.city !== undefined
+            }
+            helperText={profileForm.touched.city && profileForm.errors.city}
+          />
+          <Input
+            label="Alamat"
+            name="address"
+            placeholder="Jl. Jendral Sudirman No. 1"
+            type="text"
+            value={profileForm.values.address}
+            onChange={profileForm.handleChange}
+            error={
+              profileForm.touched.address &&
+              profileForm.errors.address !== undefined
+            }
+            helperText={
+              profileForm.touched.address && profileForm.errors.address
+            }
+          />
+          <Input
+            label="Nomor (WA)"
+            name="phoneNumber"
+            placeholder="08123456789"
+            type="text"
+            value={profileForm.values.phoneNumber}
+            onChange={profileForm.handleChange}
+            error={
+              profileForm.touched.phoneNumber &&
+              profileForm.errors.phoneNumber !== undefined
+            }
+            helperText={
+              profileForm.touched.phoneNumber && profileForm.errors.phoneNumber
+            }
+          />
+
+          <div className="w-full mt-4">
+            <LoadingButton loading={isOnRequest}>Simpan</LoadingButton>
+          </div>
+
+          {errorMessage ? (
+            <div className="alert alert-error mt-4">
+              <MdErrorOutline />
+              <span>{errorMessage}</span>
+            </div>
+          ) : null}
+        </form>
+      </div>
     </ProtectedPage>
   );
 }

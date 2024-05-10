@@ -3,7 +3,7 @@ import Calendar from "../components/layouts/Calender";
 
 export default function Home() {
   return (
-    <div>
+    <div className="md:px-24">
       <h3 className="font-semibold text-xl">Booking Online Pantai Marina</h3>
 
       <p className="mt-3 text-justify">

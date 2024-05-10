@@ -8,7 +8,7 @@ export default function Carousel() {
         alt="Carousel 1"
         width={100}
         height={100}
-        className="w-full brightness-75"
+        className="w-full brightness-75 md:h-screen object-cover"
       />
     </div>
   );
