@@ -15,9 +15,11 @@ import { toast } from "react-toastify";
 import BookTicketModal from "./BookTicketModal";
 import { useSelector } from "react-redux";
 import { selectUser } from "@/redux/features/userSlice";
+import { useRouter } from "next/router";
 
 export default function Calendar() {
   const { user } = useSelector(selectUser);
+  const router = useRouter();
 
   const [currentDate, setCurrentDate] = useState(new Date());
   const [timetables, setTimetables] = useState([]);
@@ -35,6 +37,7 @@ export default function Calendar() {
   const handleDoubleClickDate = (dateClicked) => {
     if (!user) {
       toast.error("Silahkan login terlebih dahulu");
+      router.push("/login");
       return;
     }
     document.getElementById("book_ticket_modal").showModal();
