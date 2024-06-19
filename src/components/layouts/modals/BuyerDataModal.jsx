@@ -69,7 +69,7 @@ export default function BuyerDataModal({
             process.env.NEXT_PUBLIC_EMAILJS_USER_ID
           );
         } catch (emailError) {
-          setErrorMessage("Failed to send email: " + emailError.text);
+          setErrorMessage("Gagal mengirim email. Silahkan coba lagi.");
           setIsOnRequest(false);
           return;
         }
