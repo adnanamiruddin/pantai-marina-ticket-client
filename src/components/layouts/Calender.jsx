@@ -7,6 +7,7 @@ import {
   startOfWeek,
   endOfWeek,
   isEqual,
+  startOfDay,
 } from "date-fns";
 import { id } from "date-fns/locale";
 import { VscTriangleRight, VscTriangleLeft } from "react-icons/vsc";
@@ -81,14 +82,19 @@ export default function Calendar() {
                 (timetable) =>
                   isEqual(timetable.visitDate, day) && timetable.quota === 0
               );
+              const isBeforeToday = day < startOfDay(new Date());
+              const buttonClass = isBeforeToday
+                ? "bg-gray-400 cursor-not-allowed"
+                : isQuotaFull
+                ? "bg-red-600"
+                : "bg-green-500";
+              //
               return (
                 <button
                   onDoubleClick={() => handleDoubleClickDate(day)}
                   key={dayIndex}
-                  disabled={isQuotaFull}
-                  className={`border border-gray-300 flex flex-col items-end h-24 pe-1.5 ${
-                    isQuotaFull ? "bg-red-600" : "bg-green-500"
-                  }`}
+                  disabled={isBeforeToday || isQuotaFull}
+                  className={`border border-gray-300 flex flex-col items-end h-24 pe-1.5 ${buttonClass}`}
                 >
                   <h6>{format(day, "d", { locale: id })}</h6>
                 </button>

@@ -1,7 +1,40 @@
 import Link from "next/link";
 import Calendar from "../components/layouts/Calender";
+import { useEffect, useState } from "react";
+import ticketsApi from "@/api/modules/tickets.api";
+import { addMinutes, isBefore } from "date-fns";
 
 export default function Home() {
+  const [tickets, setTickets] = useState([]);
+
+  useEffect(() => {
+    const fetchTickets = async () => {
+      const { response } = await ticketsApi.getAllTickets();
+      if (response) setTickets(response);
+    };
+    fetchTickets();
+  }, []);
+
+  useEffect(() => {
+    const checkAndCancelTickets = async () => {
+      const cancelPromises = tickets.map(async (ticket) => {
+        const ticketExpirationTime = addMinutes(new Date(ticket.createdAt), 5);
+        if (
+          isBefore(ticketExpirationTime, new Date()) &&
+          ticket.status === "pending"
+        ) {
+          const { response } = await ticketsApi.cancelTicket({
+            ticketId: ticket.id,
+          });
+          if (response) console.log(`Ticket ${ticket.id} has been cancelled.`);
+        }
+      });
+      await Promise.all(cancelPromises);
+    };
+
+    if (tickets.length > 0) checkAndCancelTickets();
+  }, [tickets]);
+
   return (
     <div className="md:px-24">
       <h3 className="font-semibold text-xl">Booking Online Pantai Marina</h3>

@@ -86,6 +86,26 @@ const ticketsApi = {
     }
   },
 
+  getAllTickets: async () => {
+    try {
+      const response = await publicClient.get(ticketsEndpoint.tickets);
+      return { response };
+    } catch (error) {
+      return { error };
+    }
+  },
+
+  cancelTicket: async ({ ticketId }) => {
+    try {
+      const response = await publicClient.delete(
+        ticketsEndpoint.ticketByTicketId({ ticketId })
+      );
+      return { response };
+    } catch (error) {
+      return { error };
+    }
+  },
+
   getVisitorReports: async () => {
     try {
       const response = await privateClient.get(ticketsEndpoint.visitorReports);
