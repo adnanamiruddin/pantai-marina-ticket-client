@@ -18,9 +18,13 @@ export default function MainLayout({ children }) {
 
   useEffect(() => {
     const authUser = async () => {
-      const { response, error } = await usersApi.getProfile();
-      if (response) dispatch(setUser(response));
-      if (error) dispatch(setUser(null));
+      if (localStorage.getItem("actkn")) {
+        const { response, error } = await usersApi.getProfile();
+        if (response) dispatch(setUser(response));
+        if (error) dispatch(setUser(null));
+      } else {
+        dispatch(setUser(null));
+      }
     };
     authUser();
   }, [dispatch]);

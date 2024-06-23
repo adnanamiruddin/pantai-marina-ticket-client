@@ -14,6 +14,7 @@ export default function ProtectedPage({ children }) {
       if (!user) router.push("/");
       setIsChecking(false);
     }, 4000);
+
     return () => clearTimeout(checkUser);
   }, [user, router]);
 

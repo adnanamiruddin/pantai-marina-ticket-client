@@ -28,11 +28,17 @@ export default function ThanksPaymentPage() {
   }, [order_id, router]);
 
   return (
-    <div className="mt-2 flex flex-col items-center gap-4 bg-green-500 text-gray-100 p-4 rounded-md font-semibold">
-      <GiConfirmed className="text-5xl" />
-      <h1 className="text-lg text-center">
-        Terima kasih telah melakukan pembayaran
-      </h1>
-    </div>
+    <>
+      <div className="mt-2 flex flex-col items-center gap-4 bg-green-500 text-gray-100 p-4 rounded-md font-semibold">
+        <GiConfirmed className="text-5xl" />
+        <h1 className="text-lg text-center">
+          Terima kasih telah melakukan pembayaran
+        </h1>
+      </div>
+
+      <p className="mt-4 text-sm font-semibold px-2">
+        Anda akan dialihkan ke halaman utama...
+      </p>
+    </>
   );
 }
