@@ -23,7 +23,7 @@ export default function Home() {
 
       const cancelPromises = tickets.map(async (ticket) => {
         const zonedDate = toZonedTime(now, timeZone);
-        const ticketExpirationTime = addMinutes(new Date(ticket.createdAt), 5);
+        const ticketExpirationTime = addMinutes(new Date(ticket.createdAt), 10);
         const zonedTicketExpirationTime = toZonedTime(
           ticketExpirationTime,
           timeZone
