@@ -10,15 +10,17 @@ export default function ThanksPaymentPage() {
 
   useEffect(() => {
     const fetchUpdateTicketStatus = async () => {
+      const ticketId = order_id.split("-")[0];
+
       const { response, error } = await ticketsApi.updateTicketStatus({
-        ticketId: order_id.split("-")[0],
+        ticketId,
         status: "paid",
       });
 
       if (response) {
         toast.success("Pembayaran berhasil");
         setTimeout(() => {
-          router.push("/");
+          router.push(`/tickets/${ticketId}`);
         }, 3000);
       }
       if (error) toast.error(error.message);
@@ -37,7 +39,7 @@ export default function ThanksPaymentPage() {
       </div>
 
       <p className="mt-4 text-sm font-semibold px-2">
-        Anda akan dialihkan ke halaman utama...
+        Anda akan dialihkan ke halaman tiket Anda...
       </p>
     </>
   );
