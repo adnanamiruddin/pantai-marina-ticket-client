@@ -138,7 +138,7 @@ export default function Navbar() {
             </Link>
           </li>
 
-          {!user ? (
+          {user ? (
             <>
               {loggedInLinks.map((link) => (
                 <li key={link.href}>

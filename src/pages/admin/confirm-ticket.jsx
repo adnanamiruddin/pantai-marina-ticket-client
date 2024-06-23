@@ -53,7 +53,7 @@ export default function ConfirmTicket() {
   return (
     <ProtectedPage>
       <AdminPage>
-        <div className="md:mx-16 md:mt-2">
+        <div className="md:mx-16 md:mt-10">
           <h1 className="text-3xl font-bold">Konfirmasi Tiket</h1>
 
           <form

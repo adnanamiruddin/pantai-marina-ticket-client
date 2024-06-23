@@ -32,7 +32,7 @@ export default function HomeAdmin() {
     <ProtectedPage>
       <AdminPage>
         {isDataLoaded ? (
-          <div className="md:mx-16 md:mt-2">
+          <div className="md:mx-16 md:mt-10">
             <h1 className="text-3xl font-bold">Laporan Pengunjung</h1>
 
             {visitorReports.length > 0 ? (
