@@ -5,6 +5,8 @@ const ticketsEndpoint = {
   tickets: "/tickets",
   timetables: "/tickets/timetables",
   payTicketByTicketId: ({ ticketId }) => `/tickets/pay/${ticketId}`,
+  ticketIdByBookingCode: ({ bookingCode }) =>
+    `/tickets/booking-code/${bookingCode}`,
   ticketByTicketId: ({ ticketId }) => `/tickets/${ticketId}`,
   userTickets: "/tickets/user-tickets",
   visitorReports: "/tickets/visitor-reports",
@@ -65,6 +67,17 @@ const ticketsApi = {
           price,
           quantity,
         }
+      );
+      return { response };
+    } catch (error) {
+      return { error };
+    }
+  },
+
+  getTicketIdByBookingCode: async ({ bookingCode }) => {
+    try {
+      const response = await privateClient.get(
+        ticketsEndpoint.ticketIdByBookingCode({ bookingCode })
       );
       return { response };
     } catch (error) {

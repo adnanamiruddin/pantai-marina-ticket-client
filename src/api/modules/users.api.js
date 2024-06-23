@@ -8,6 +8,19 @@ const usersEndpoint = {
 };
 
 const usersApi = {
+  signUp: async ({ userUID, firstName, lastName }) => {
+    try {
+      const response = await publicClient.post(usersEndpoint.signUp, {
+        userUID,
+        firstName,
+        lastName,
+      });
+      return { response };
+    } catch (error) {
+      return { error };
+    }
+  },
+
   signIn: async ({ userUID }) => {
     try {
       const response = await publicClient.post(usersEndpoint.signIn, {

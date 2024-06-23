@@ -23,10 +23,9 @@ export default function Home() {
           isBefore(ticketExpirationTime, new Date()) &&
           ticket.status === "pending"
         ) {
-          const { response } = await ticketsApi.cancelTicket({
+          await ticketsApi.cancelTicket({
             ticketId: ticket.id,
           });
-          if (response) console.log(`Ticket ${ticket.id} has been cancelled.`);
         }
       });
       await Promise.all(cancelPromises);

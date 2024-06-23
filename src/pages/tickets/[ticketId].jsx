@@ -81,7 +81,7 @@ export default function TicketDetail() {
       <div className="shadow-md border border-gray-200 p-4 rounded md:w-[32%]">
         <h2 className="font-bold text-3xl">Tiket</h2>
 
-        <div className="mt-4 flex justify-between">
+        <div className="mt-4 flex justify-between items-center">
           <div>
             <h6 className="text-sm">
               {format(ticket.visitDate, "eeee, dd-MM-yyyy", { locale: id })}
@@ -92,10 +92,16 @@ export default function TicketDetail() {
             className={`text-sm text-white py-0.5 rounded font-medium ${
               ticket.status === "pending"
                 ? "bg-red-500 px-2"
-                : "bg-green-500 px-3"
+                : ticket.status === "paid"
+                ? "bg-green-500 px-3"
+                : "bg-orange-500 px-3"
             }`}
           >
-            {ticket.status === "pending" ? "Menunggu Pembayaran" : "Selesai"}
+            {ticket.status === "pending"
+              ? "Menunggu Pembayaran"
+              : ticket.status === "paid"
+              ? "Sudah Dibayar"
+              : "Telah Dikonfirmasi"}
           </div>
         </div>
 
@@ -128,9 +134,20 @@ export default function TicketDetail() {
             )}
           </button>
         ) : (
-          <div className="mt-5 w-full bg-green-500 border-0 text-white font-medium text-lg py-3 rounded hover:brightness-110 flex justify-center">
-            Sudah Dibayar
-          </div>
+          <>
+            <div
+              className={`mt-5 w-full border-0 font-medium text-lg py-3 rounded flex justify-center hover:brightness-110 ${
+                ticket.status !== "paid"
+                  ? "bg-green-600 text-white"
+                  : "bg-green-700 text-gray-200"
+              }`}
+            >
+              {ticket.bookingCode}
+            </div>
+            <p className="text-end text-xs mt-2 text-orange-600 font-semibold">
+              *kode di atas merupakan kode booking tiket
+            </p>
+          </>
         )}
       </div>
     ) : (

@@ -5,35 +5,22 @@ import Link from "next/link";
 import { IoMenu } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { FaRegAddressBook, FaTicketAlt } from "react-icons/fa";
-import { FiLogIn, FiLogOut } from "react-icons/fi";
+import { FaTicketAlt } from "react-icons/fa";
+import { FiLogOut } from "react-icons/fi";
 import { FaHome } from "react-icons/fa";
 import { useRouter } from "next/router";
-import { MdAccountCircle } from "react-icons/md";
-
-const notLoggedInLinks = [
-  {
-    href: "/login",
-    label: "Login",
-    icon: <FiLogIn className="text-2xl me-1" />,
-  },
-  {
-    href: "/register",
-    label: "Register",
-    icon: <FaRegAddressBook className="text-2xl me-1" />,
-  },
-];
+import { GiConfirmed } from "react-icons/gi";
 
 const loggedInLinks = [
   {
-    href: "/dashboard/profile",
-    label: "Profil",
-    icon: <MdAccountCircle className="text-2xl me-1" />,
+    href: "/admin",
+    label: "Laporan Pengunjung",
+    icon: <FaTicketAlt className="text-2xl me-1" />,
   },
   {
-    href: "/dashboard/my-tickets",
-    label: "Tiket Saya",
-    icon: <FaTicketAlt className="text-2xl me-1" />,
+    href: "/admin/confirm-ticket",
+    label: "Konfirmasi Tiket",
+    icon: <GiConfirmed className="text-2xl me-1" />,
   },
 ];
 
@@ -106,24 +93,7 @@ export default function Navbar() {
               </Link>
             </li>
 
-            {!user ? (
-              <>
-                {notLoggedInLinks.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      onClick={handleDrawerClose}
-                      className={`text-lg font-semibold ${
-                        router.pathname === link.href ? "bg-orange-400" : ""
-                      }`}
-                    >
-                      {link.icon}
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </>
-            ) : (
+            {user ? (
               <>
                 {loggedInLinks.map((link) => (
                   <li key={link.href}>
@@ -149,7 +119,7 @@ export default function Navbar() {
                   </button>
                 </li>
               </>
-            )}
+            ) : null}
           </ul>
         </div>
       </div>
@@ -169,22 +139,6 @@ export default function Navbar() {
           </li>
 
           {!user ? (
-            <>
-              {notLoggedInLinks.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    onClick={handleDrawerClose}
-                    className={`text-lg font-semibold focus:bg-orange-400 focus:text-black ${
-                      router.pathname === link.href ? "bg-orange-400" : ""
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </>
-          ) : (
             <>
               {loggedInLinks.map((link) => (
                 <li key={link.href}>
@@ -208,7 +162,7 @@ export default function Navbar() {
                 </button>
               </li>
             </>
-          )}
+          ) : null}
         </ul>
       </div>
     </div>

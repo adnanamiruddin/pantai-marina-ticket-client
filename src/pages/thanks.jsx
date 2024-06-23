@@ -2,8 +2,9 @@ import ticketsApi from "@/api/modules/tickets.api";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
+import { GiConfirmed } from "react-icons/gi";
 
-export default function Thanks() {
+export default function ThanksPaymentPage() {
   const router = useRouter();
   const { order_id } = router.query;
 
@@ -15,8 +16,10 @@ export default function Thanks() {
       });
 
       if (response) {
-        router.push("/");
         toast.success("Pembayaran Berhasil");
+        setTimeout(() => {
+          router.push("/");
+        }, 3000);
       }
       if (error) toast.error(error.message);
     };
@@ -25,8 +28,11 @@ export default function Thanks() {
   }, [order_id, router]);
 
   return (
-    <div>
-      <h1>Thanks {order_id}</h1>
+    <div className="mt-2 flex flex-col items-center gap-4 bg-green-500 text-gray-100 p-4 rounded-md font-semibold">
+      <GiConfirmed className="text-5xl" />
+      <h1 className="text-lg text-center">
+        Terima kasih telah melakukan pembayaran
+      </h1>
     </div>
   );
 }
