@@ -16,7 +16,7 @@ export default function ThanksPaymentPage() {
       });
 
       if (response) {
-        toast.success("Pembayaran Berhasil");
+        toast.success("Pembayaran berhasil");
         setTimeout(() => {
           router.push("/");
         }, 3000);

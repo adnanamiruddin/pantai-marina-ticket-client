@@ -16,7 +16,7 @@ export default function TicketDetail() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const snapScript = "https://app.sandbox.midtrans.com/snap/snap.js";
+    const snapScript = process.env.NEXT_PUBLIC_PAYMENT_SNAP_SCRIPT;
     const clientKey = process.env.NEXT_PUBLIC_PAYMENT_CLIENT;
 
     const script = document.createElement("script");
