@@ -1,4 +1,4 @@
-/* Custom Loading START */
+/* Global Loading */
 .loader {
   --duration: 3s;
   --primary: #ff6600;
@@ -861,4 +861,3 @@
     opacity: 1;
   }
 }
-/* Custom Loading END */

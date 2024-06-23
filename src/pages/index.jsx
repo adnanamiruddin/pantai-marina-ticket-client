@@ -3,6 +3,7 @@ import Calendar from "../components/layouts/Calender";
 import { useEffect, useState } from "react";
 import ticketsApi from "@/api/modules/tickets.api";
 import { addMinutes, isBefore } from "date-fns";
+import { toZonedTime } from "date-fns-tz";
 
 export default function Home() {
   const [tickets, setTickets] = useState([]);
@@ -17,10 +18,19 @@ export default function Home() {
 
   useEffect(() => {
     const checkAndCancelTickets = async () => {
+      const timeZone = "Asia/Makassar";
+      const now = new Date();
+
       const cancelPromises = tickets.map(async (ticket) => {
+        const zonedDate = toZonedTime(now, timeZone);
         const ticketExpirationTime = addMinutes(new Date(ticket.createdAt), 5);
+        const zonedTicketExpirationTime = toZonedTime(
+          ticketExpirationTime,
+          timeZone
+        );
+
         if (
-          isBefore(ticketExpirationTime, new Date()) &&
+          isBefore(zonedTicketExpirationTime, zonedDate) &&
           ticket.status === "pending"
         ) {
           await ticketsApi.cancelTicket({

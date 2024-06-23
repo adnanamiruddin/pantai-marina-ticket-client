@@ -1,5 +1,4 @@
-/* Custom 404 Not Found Card START */
-/* Design Inspired by one of Stefan Devai's Design on Dribble */
+/* Custom 404 Not Found Card */
 .main_wrapper {
   display: flex;
   align-items: center;
@@ -441,4 +440,3 @@
 .text_4043 {
   transform: scaleY(24.5) scaleX(9);
 }
-/* Custom 404 Not Found Card END */
