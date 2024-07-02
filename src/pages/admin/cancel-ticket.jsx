@@ -15,7 +15,7 @@ export default function CancelTicket() {
   const [selectedTicketId, setSelectedTicketId] = useState(null);
 
   useEffect(() => {
-    const fetchPendingTickets = async () => {
+    const fetchTickets = async () => {
       const { response, error } =
         await ticketsApi.getPendingTicketsOverHalfHour();
       if (response) {
@@ -30,7 +30,7 @@ export default function CancelTicket() {
       }
       if (error) toast.error(error.message);
     };
-    fetchPendingTickets();
+    fetchTickets();
   }, []);
 
   return (

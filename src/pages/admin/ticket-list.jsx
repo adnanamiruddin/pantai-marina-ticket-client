@@ -14,7 +14,7 @@ export default function TicketList() {
   const [selectedTicketId, setSelectedTicketId] = useState(null);
 
   useEffect(() => {
-    const fetchPaidTickets = async () => {
+    const fetchAllTickets = async () => {
       const { response, error } = await ticketsApi.getAllTickets();
       if (response) {
         // Sort by createdAt newest to oldest
@@ -28,7 +28,7 @@ export default function TicketList() {
       }
       if (error) toast.error(error.message);
     };
-    fetchPaidTickets();
+    fetchAllTickets();
   }, []);
 
   return (
