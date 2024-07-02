@@ -1,6 +1,5 @@
 import { format } from "date-fns";
 import { id } from "date-fns/locale";
-import ConfirmCancelTicketModal from "./modals/ConfirmCancelTicketModal";
 import { useRouter } from "next/router";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 
@@ -46,7 +45,7 @@ export default function TicketItem({ ticket, setSelectedTicketId }) {
         </h6>
         {/*  */}
         <div
-          className={`text-sm text-white py-0.5 rounded font-medium ${
+          className={`text-sm text-white py-0.5 rounded font-medium md:text-xs ${
             ticket.status === "pending"
               ? "bg-gray-600 px-2"
               : ticket.status === "paid"

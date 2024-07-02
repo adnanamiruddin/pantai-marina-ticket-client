@@ -139,7 +139,7 @@ export default function Navbar() {
       {/* Mobile View END */}
 
       {/* Desktop View START */}
-      <div className="hidden md:flex text-black">
+      <div className="hidden md:inline-block text-black">
         <ul className="menu menu-horizontal gap-4">
           <li>
             <Link

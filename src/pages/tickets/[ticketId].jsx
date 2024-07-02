@@ -45,7 +45,7 @@ export default function TicketDetail() {
     <>
       {isDataLoaded ? (
         ticket ? (
-          <div className="shadow-md border border-orange-300 p-4 rounded md:w-[32%]">
+          <div className="shadow-md border border-orange-300 p-4 rounded md:w-[33%] md:mx-auto md:mt-[6%]">
             <h2 className="font-bold text-3xl">Tiket</h2>
 
             <div className="mt-4 flex justify-between items-center">
@@ -105,11 +105,15 @@ export default function TicketDetail() {
 
             {ticket.status === "pending" ? (
               <button
-                className="mt-5 w-full bg-orange-500 border-0 text-white text-lg font-semibold py-3 rounded hover:bg-orange-400"
                 onClick={handlePayForTicketButtonClicked}
+                className="mt-5 w-full bg-orange-500 border-0 text-white text-lg font-semibold py-3 rounded hover:bg-orange-400"
               >
                 Bayar Sekarang
               </button>
+            ) : ticket.status === "cancelled" ? (
+              <div className="mt-5 w-full bg-red-600 border-0 text-white text-lg font-semibold py-3 rounded hover:bg-red-500 text-center">
+                Tiket Telah Dibatalkan Admin
+              </div>
             ) : (
               <>
                 <div
