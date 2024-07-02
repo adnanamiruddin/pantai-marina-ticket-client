@@ -72,7 +72,9 @@ export default function Home() {
       <div className="mt-6">
         <HomeMapLocation />
         {/*  */}
-        <p className="mt-1 text-xs">*Klik untuk membuka Google Mapas</p>
+        <p className="mt-1 text-xs">
+          *Klik ikon untuk melihat dari Google Maps
+        </p>
       </div>
 
       <Link

@@ -37,7 +37,8 @@ export default function HomeMapLocation() {
         const lng = marker.getLatLng().lng;
         const googleMapsUrl = `https://maps.google.com/maps?q=${lat},${lng}&z=13`;
         //
-        router.push(googleMapsUrl);
+        // router.push(googleMapsUrl);
+        window.open(googleMapsUrl, "_blank");
       });
     }
 
@@ -47,7 +48,7 @@ export default function HomeMapLocation() {
         mapRef.current = null;
       }
     };
-  }, [router]);
+  }, []);
 
   return <div id="map" style={{ height: "500px", width: "100%" }}></div>;
 }
