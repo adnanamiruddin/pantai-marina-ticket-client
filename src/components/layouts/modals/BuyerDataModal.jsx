@@ -40,16 +40,18 @@ export default function BuyerDataModal({
       if (isOnRequest) return;
 
       setIsOnRequest(true);
+      const totalPrice =
+        adulTicketCount * 10000 +
+        childTicketCount * 5000 +
+        carCount * 3000 +
+        motorcycleCount * 2000;
+
       const { response, error } = await ticketsApi.bookTickets({
         adultCount: adulTicketCount,
         childCount: childTicketCount,
         carCount,
         motorcycleCount,
-        totalPrice:
-          adulTicketCount * 10000 +
-          childTicketCount * 5000 +
-          carCount * 3000 +
-          motorcycleCount * 2000,
+        totalPrice,
         visitDate: selectedDate,
         buyerName: values.name,
         buyerPhoneNumber: values.phoneNumber,
@@ -71,9 +73,7 @@ export default function BuyerDataModal({
               childCount: childTicketCount,
               carCount,
               motorcycleCount,
-              totalPrice: formatRupiah(
-                adulTicketCount * 10000 + childTicketCount * 5000
-              ),
+              totalPrice: formatRupiah(totalPrice),
               newTicketLink: `${process.env.NEXT_PUBLIC_BASE_URL}/tickets/${response.id}`,
             },
             process.env.NEXT_PUBLIC_EMAILJS_USER_ID
