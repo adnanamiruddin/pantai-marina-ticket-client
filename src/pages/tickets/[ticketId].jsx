@@ -54,14 +54,14 @@ export default function TicketDetail() {
               </h6>
               {/*  */}
               <div
-                className={`text-sm text-white py-0.5 rounded ${
+                className={`text-sm text-white py-0.5 rounded font-medium ${
                   ticket.status === "pending"
-                    ? "bg-red-500 px-2"
+                    ? "bg-gray-600 px-2"
                     : ticket.status === "paid"
                     ? "bg-green-600 px-3"
                     : ticket.status === "confirmed"
                     ? "bg-orange-600 px-3"
-                    : "bg-red-700 px-3"
+                    : "bg-red-600 px-3"
                 }`}
               >
                 {ticket.status === "pending"
