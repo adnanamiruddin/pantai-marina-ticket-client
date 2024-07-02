@@ -173,7 +173,7 @@ export default function Navbar() {
               <li className="mt-auto">
                 <button
                   onClick={handleLogout}
-                  className="text-lg font-semibold bg-red-600 text-white"
+                  className="text-lg font-semibold bg-red-600 text-white hover:bg-red-500 focus:bg-red-700"
                 >
                   Logout
                 </button>
