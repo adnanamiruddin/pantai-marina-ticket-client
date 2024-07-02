@@ -4,6 +4,14 @@ import { useEffect, useState } from "react";
 import ticketsApi from "@/api/modules/tickets.api";
 import { addMinutes, isBefore } from "date-fns";
 import { toZonedTime } from "date-fns-tz";
+import dynamic from "next/dynamic";
+
+const HomeMapLocation = dynamic(
+  () => import("@/components/layouts/HomeMapLocation"),
+  {
+    ssr: false,
+  }
+);
 
 export default function Home() {
   const [tickets, setTickets] = useState([]);
@@ -60,6 +68,12 @@ export default function Home() {
         Buka Setiap hari pukul 08:00-16:00 WIB & Tutup pada Hari Besar Keagamaan
         sesuai SKB Tiga Menteri tentang Hari Libur Nasional dan Cuti Bersama
       </p>
+
+      <div className="mt-6">
+        <HomeMapLocation />
+        {/*  */}
+        <p className="mt-1 text-xs">*Klik untuk membuka Google Mapas</p>
+      </div>
 
       <Link
         href="#calendar"

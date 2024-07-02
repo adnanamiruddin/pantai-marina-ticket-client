@@ -13,14 +13,13 @@ export default function CancelTicket() {
   useEffect(() => {
     const fetchPendingTickets = async () => {
       const { response, error } =
-        await ticketsApi.getPendingTicketsOverOneHour();
+        await ticketsApi.getPendingTicketsOverHalfHour();
       if (response) {
         // Sort by createdAt newest to oldest
         const sortedTickets = response.sort(
           (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
         );
         setTickets(sortedTickets);
-        console.log(sortedTickets);
         setTimeout(() => {
           setIsDataLoaded(true);
         }, 3000);
@@ -40,7 +39,7 @@ export default function CancelTicket() {
             </h1>
 
             <p className="text-sm mt-3">
-              *Hanya tiket yang melebihi 1 jam belum dibayar yang ditampilkan
+              *Hanya tiket yang melebihi 30 menit belum dibayar yang ditampilkan
             </p>
 
             {tickets.length > 0 ? (

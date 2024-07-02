@@ -151,7 +151,7 @@ const ticketsApi = {
     }
   },
 
-  getPendingTicketsOverOneHour: async () => {
+  getPendingTicketsOverHalfHour: async () => {
     try {
       const response = await privateClient.get(ticketsEndpoint.pendingTickets);
       return { response };
