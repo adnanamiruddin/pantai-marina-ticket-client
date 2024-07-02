@@ -8,30 +8,51 @@
   --background-end-rgb: 255, 255, 255;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+/* Tambahkan kode untuk styling scrollbar di sini */
+*::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgba(var(--background-start-rgb), 0.3);
+  border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: rgba(var(--foreground-rgb), 0.7);
+  border-radius: 10px;
+  border: 3px solid rgba(var(--background-end-rgb), 0.5);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(var(--foreground-rgb), 0.9);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(var(--foreground-rgb), 0.7)
+    rgba(var(--background-start-rgb), 0.3);
+}
+
+* {
+  -ms-overflow-style: -ms-autohiding-scrollbar;
 }

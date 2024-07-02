@@ -53,7 +53,7 @@ export default function Home() {
   }, [tickets]);
 
   return (
-    <div className="md:px-24 md:mt-12">
+    <div className="pb-4 md:px-24 md:mt-12 md:pb-10">
       <div className="md:grid grid-cols-2 gap-16">
         <div>
           <h3 className="font-semibold text-xl md:text-2xl">
