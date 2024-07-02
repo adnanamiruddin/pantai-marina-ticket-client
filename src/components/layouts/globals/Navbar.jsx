@@ -58,7 +58,7 @@ export default function Navbar() {
   };
 
   return (
-    <div className="bg-white px-6 py-3 flex justify-between items-center fixed w-full shadow-lg z-[999]">
+    <div className="bg-white px-6 py-3 flex justify-between items-center fixed w-full shadow-lg z-[99999]">
       <Image
         src="/logo_with_text.png"
         alt="Logo Pantai Marina"
@@ -67,6 +67,7 @@ export default function Navbar() {
         className="w-[60%] md:w-[20%]"
       />
 
+      {/* Mobile View START */}
       <div className="drawer-end md:hidden">
         <input id="navbar_drawer" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content">
@@ -135,15 +136,17 @@ export default function Navbar() {
           </ul>
         </div>
       </div>
+      {/* Mobile View END */}
 
+      {/* Desktop View START */}
       <div className="hidden md:flex text-black">
         <ul className="menu menu-horizontal gap-4">
           <li>
             <Link
               href="/"
               onClick={handleDrawerClose}
-              className={`text-lg font-semibold focus:bg-orange-400 focus:text-black ${
-                router.pathname === "/" ? "bg-orange-400" : ""
+              className={`text-lg font-semibold hover:bg-orange-400 hover:text-white focus:bg-orange-600 focus:text-white ${
+                router.pathname === "/" ? "bg-orange-500 text-white" : ""
               }`}
             >
               Beranda
@@ -157,8 +160,10 @@ export default function Navbar() {
                   <Link
                     href={link.href}
                     onClick={handleDrawerClose}
-                    className={`text-lg font-semibold focus:bg-orange-400 focus:text-black ${
-                      router.pathname === link.href ? "bg-orange-400" : ""
+                    className={`text-lg font-semibold hover:bg-orange-400 hover:text-white focus:bg-orange-600 focus:text-white ${
+                      router.pathname === link.href
+                        ? "bg-orange-500 text-white"
+                        : ""
                     }`}
                   >
                     {link.label}
@@ -177,6 +182,7 @@ export default function Navbar() {
           ) : null}
         </ul>
       </div>
+      {/* Desktop View START */}
     </div>
   );
 }

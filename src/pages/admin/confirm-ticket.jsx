@@ -1,6 +1,8 @@
 import ticketsApi from "@/api/modules/tickets.api";
 import GlobalLoading from "@/components/layouts/globals/GlobalLoading";
 import NotFound from "@/components/layouts/globals/NotFound";
+import BuyerTicketDataModal from "@/components/layouts/modals/BuyerTicketDataModal";
+import ShowProofOfPaymentModal from "@/components/layouts/modals/ShowProofOfPaymentModal";
 import TicketItem from "@/components/layouts/TicketItem";
 import AdminPage from "@/components/utils/AdminPage";
 import ProtectedPage from "@/components/utils/ProtectedPage";
@@ -9,6 +11,7 @@ import { useEffect, useState } from "react";
 export default function ConfirmTicket() {
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [tickets, setTickets] = useState([]);
+  const [selectedTicketId, setSelectedTicketId] = useState(null);
 
   useEffect(() => {
     const fetchPaidTickets = async () => {
@@ -32,18 +35,31 @@ export default function ConfirmTicket() {
     <ProtectedPage>
       <AdminPage>
         {isDataLoaded ? (
-          <div className="md:mx-16 md:mt-10">
+          <div className="pb-10 md:mx-16 md:mt-10">
             <h1 className="text-3xl font-bold">Konfirmasi Tiket</h1>
 
             {tickets.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-6">
                 {tickets.map((ticket, i) => (
-                  <TicketItem key={i} ticket={ticket} />
+                  <TicketItem
+                    key={i}
+                    ticket={ticket}
+                    setSelectedTicketId={setSelectedTicketId}
+                  />
                 ))}
               </div>
             ) : (
               <NotFound />
             )}
+
+            <ShowProofOfPaymentModal
+              ticketId={selectedTicketId}
+              setSelectedTicketId={setSelectedTicketId}
+            />
+            <BuyerTicketDataModal
+              ticketId={selectedTicketId}
+              setSelectedTicketId={setSelectedTicketId}
+            />
           </div>
         ) : (
           <GlobalLoading />

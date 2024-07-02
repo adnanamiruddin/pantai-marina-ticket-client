@@ -108,7 +108,7 @@ export default function Calendar() {
 
   return (
     <>
-      <div className="mt-12 mb-8 flex justify-between items-center">
+      <div className="mt-12 mb-8 flex justify-between items-center md:mt-16">
         <h2 className="text-2xl font-medium">
           {format(currentDate, "MMMM yyyy", { locale: id })}
         </h2>
@@ -116,21 +116,21 @@ export default function Calendar() {
         <div className="flex items-center gap-4">
           <button
             onClick={() => handleDoubleClickDate(new Date())}
-            className="py-2 px-3 bg-orange-500 w-full border-0 text-white hover:bg-orange-700"
+            className="py-2 px-3 bg-orange-500 w-full border-0 text-white hover:bg-orange-400 focus:bg-orange-600 rounded"
           >
             Hari ini
           </button>
 
           <div className="flex justify-center items-center">
             <button
-              className="p-2.5 bg-orange-500 w-full border-0 text-white hover:bg-orange-700"
+              className="p-2.5 bg-orange-500 w-full border-0 text-white hover:bg-orange-400 focus:bg-orange-600 rounded-l"
               onClick={handlePrevWeek}
             >
               <VscTriangleLeft className="text-xl" />
             </button>
 
             <button
-              className="p-2.5 bg-orange-500 w-full border-0 text-white hover:bg-orange-700"
+              className="p-2.5 bg-orange-500 w-full border-0 text-white hover:bg-orange-400 focus:bg-orange-600 rounded-r"
               onClick={handleNextWeek}
             >
               <VscTriangleRight className="text-xl" />

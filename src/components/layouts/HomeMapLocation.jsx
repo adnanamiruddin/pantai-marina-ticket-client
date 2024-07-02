@@ -1,10 +1,8 @@
 import { useEffect, useRef } from "react";
 import L from "leaflet";
-import { useRouter } from "next/router";
 
 export default function HomeMapLocation() {
   const mapRef = useRef(null);
-  const router = useRouter();
 
   useEffect(() => {
     if (!mapRef.current) {
@@ -50,5 +48,5 @@ export default function HomeMapLocation() {
     };
   }, []);
 
-  return <div id="map" style={{ height: "500px", width: "100%" }}></div>;
+  return <div id="map" className="w-full h-96"></div>;
 }

@@ -32,18 +32,20 @@ export default function HomeAdmin() {
     <ProtectedPage>
       <AdminPage>
         {isDataLoaded ? (
-          <div className="md:mx-16 md:mt-10">
+          <div className="pb-10 md:mx-16 md:mt-10">
             <h1 className="text-3xl font-bold">Laporan Pengunjung</h1>
 
             {visitorReports.length > 0 ? (
-              <div className="mt-6 overflow-x-auto">
+              <div className="mt-6 overflow-x-auto md:mt-8">
                 <table className="table">
-                  <thead>
-                    <tr className="text-base text-black md:text-2xl">
+                  <thead className="bg-orange-500">
+                    <tr className="text-base text-white md:text-lg">
                       <th>No.</th>
                       <th>Tanggal Kunjungan</th>
                       <th>Pengunjung Dewasa</th>
                       <th>Pengunjung Anak-Anak</th>
+                      <th>Mobil</th>
+                      <th>Motor</th>
                       <th>Total Pengunjung</th>
                       <th>Sisa Kuota</th>
                     </tr>
@@ -53,7 +55,7 @@ export default function HomeAdmin() {
                     {visitorReports.map((visitorReport, index) => (
                       <tr
                         key={visitorReport.id}
-                        className="text-base text-black md:text-lg"
+                        className="text-base text-black odd:bg-gray-100 even:bg-gray-200"
                       >
                         <td>{index + 1}.</td>
                         <td>
@@ -69,6 +71,16 @@ export default function HomeAdmin() {
                         <td>
                           <p className="text-center">
                             {visitorReport.childCount}
+                          </p>
+                        </td>
+                        <td>
+                          <p className="text-center">
+                            {visitorReport.carCount}
+                          </p>
+                        </td>
+                        <td>
+                          <p className="text-center">
+                            {visitorReport.motorcycleCount}
                           </p>
                         </td>
                         <td>
@@ -89,6 +101,8 @@ export default function HomeAdmin() {
                       <th>Tanggal Kunjungan</th>
                       <th>Pengunjung Dewasa</th>
                       <th>Pengunjung Anak-Anak</th>
+                      <th>Mobil</th>
+                      <th>Motor</th>
                       <th>Total Pengunjung</th>
                       <th>Sisa Kuota</th>
                     </tr>

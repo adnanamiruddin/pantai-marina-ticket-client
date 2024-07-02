@@ -1,23 +1,24 @@
 import { format } from "date-fns";
 import { id } from "date-fns/locale";
-import ShowProofOfPaymentModal from "./modals/ShowProofOfPaymentModal";
 import ConfirmCancelTicketModal from "./modals/ConfirmCancelTicketModal";
 import { useRouter } from "next/router";
-import BuyerTicketDataModal from "./modals/BuyerTicketDataModal";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 
-export default function TicketItem({ ticket }) {
+export default function TicketItem({ ticket, setSelectedTicketId }) {
   const router = useRouter();
 
   const handleShowProofOfPaymentModalButtonClicked = () => {
+    setSelectedTicketId(ticket.id);
     document.getElementById("show_proof_of_payment_modal").showModal();
   };
 
   const handleCancelTicketButtonClicked = () => {
+    setSelectedTicketId(ticket.id);
     document.getElementById("confirm_cancel_ticket_modal").showModal();
   };
 
   const handleBuyerTicketDataButtonClicked = () => {
+    setSelectedTicketId(ticket.id);
     document.getElementById("buyer_ticket_data_modal").showModal();
   };
 
@@ -29,7 +30,7 @@ export default function TicketItem({ ticket }) {
   };
 
   return (
-    <div className="relative shadow-md border border-orange-300 p-4 rounded md:w-[32%]">
+    <div className="relative shadow-md border border-orange-300 p-4 rounded">
       <button
         onClick={handleBuyerTicketDataButtonClicked}
         className="absolute top-2.5 right-2.5"
@@ -39,7 +40,7 @@ export default function TicketItem({ ticket }) {
 
       <h2 className="font-bold text-2xl">{ticket.bookingCode}</h2>
 
-      <div className="mt-4 flex justify-between items-center">
+      <div className="mt-4 flex justify-between items-center md:mt-5">
         <h6 className="text-sm">
           {format(ticket.visitDate, "eeee, dd-MM-yyyy", { locale: id })}
         </h6>
@@ -94,33 +95,23 @@ export default function TicketItem({ ticket }) {
         <h4>{formatRupiah(ticket.transaction.totalPrice)}</h4>
       </div>
 
-      <BuyerTicketDataModal ticket={ticket} />
-
-      {ticket.status === "paid" ? (
-        <>
-          <button
-            onClick={handleShowProofOfPaymentModalButtonClicked}
-            className="mt-5 w-full bg-orange-500 border-0 text-white text-lg font-semibold py-3 rounded hover:brightness-110"
-          >
-            Lihat Bukti Pembayaraan
-          </button>
-          {/*  */}
-          <ShowProofOfPaymentModal ticket={ticket} />
-        </>
+      {ticket.status === "paid" || ticket.status === "confirmed" ? (
+        <button
+          onClick={handleShowProofOfPaymentModalButtonClicked}
+          className="mt-5 w-full bg-orange-500 border-0 text-white text-lg font-semibold py-3 rounded hover:brightness-110"
+        >
+          Lihat Bukti Pembayaraan
+        </button>
       ) : null}
 
       {ticket.status === "pending" &&
       router.pathname === "/admin/cancel-ticket" ? (
-        <>
-          <button
-            onClick={handleCancelTicketButtonClicked}
-            className="mt-5 w-full bg-red-600 border-0 text-white text-lg font-semibold py-3 rounded hover:brightness-110"
-          >
-            Batalkan Tiket
-          </button>
-          {/*  */}
-          <ConfirmCancelTicketModal ticket={ticket} />
-        </>
+        <button
+          onClick={handleCancelTicketButtonClicked}
+          className="mt-5 w-full bg-red-600 border-0 text-white text-lg font-semibold py-3 rounded hover:brightness-110"
+        >
+          Batalkan Tiket
+        </button>
       ) : null}
     </div>
   );

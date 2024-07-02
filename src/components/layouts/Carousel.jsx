@@ -2,7 +2,7 @@ import CarouselItem from "./CarouselItem";
 
 export default function Carousel() {
   return (
-    <div className="carousel relative w-full md:h-screen mt-20 md:mt-0">
+    <div className="carousel relative w-full md:h-screen mt-20 md:mt-24">
       <CarouselItem
         slide={"slide1"}
         image="/carousel_image1.png"

@@ -53,36 +53,44 @@ export default function Home() {
   }, [tickets]);
 
   return (
-    <div className="md:px-24">
-      <h3 className="font-semibold text-xl">Booking Online Pantai Marina</h3>
+    <div className="md:px-24 md:mt-12">
+      <div className="md:grid grid-cols-2 gap-16">
+        <div>
+          <h3 className="font-semibold text-xl md:text-2xl">
+            Booking Online Pantai Marina
+          </h3>
 
-      <p className="mt-3 text-justify">
-        Pantai Marina merupakan sebuah daya tarik wisata yang terkenal karena
-        keindahan alamnya yang memukau. Pantai Marina dikelilingi oleh pasir
-        halus, air laut yang transparan, serta pemandangan pegunungan yang
-        menawan. Keindahan alam yang luar biasa ini menciptakan suasana damai
-        dan menenangkan bagi para pengunjungnya.
-      </p>
+          <p className="mt-3 text-justify md:mt-6">
+            Pantai Marina merupakan sebuah daya tarik wisata yang terkenal
+            karena keindahan alamnya yang memukau. Pantai Marina dikelilingi
+            oleh pasir halus, air laut yang transparan, serta pemandangan
+            pegunungan yang menawan. Keindahan alam yang luar biasa ini
+            menciptakan suasana damai dan menenangkan bagi para pengunjungnya.
+          </p>
 
-      <p className="mt-6 text-justify font-medium">
-        Buka Setiap hari pukul 08:00-16:00 WIB & Tutup pada Hari Besar Keagamaan
-        sesuai SKB Tiga Menteri tentang Hari Libur Nasional dan Cuti Bersama
-      </p>
+          <p className="mt-6 text-justify font-medium md:mt-10">
+            Buka Setiap hari pukul 08:00-16:00 WIB & Tutup pada Hari Besar
+            Keagamaan sesuai SKB Tiga Menteri tentang Hari Libur Nasional dan
+            Cuti Bersama
+          </p>
 
-      <div className="mt-6">
-        <HomeMapLocation />
-        {/*  */}
-        <p className="mt-1 text-xs">
-          *Klik ikon untuk melihat dari Google Maps
-        </p>
+          <button className="hidden md:inline-block mt-10 btn bg-orange-500 w-1/2 border-0 text-white text-lg hover:bg-orange-400 focus:bg-orange-600">
+            Pesan Tiket Sekarang
+          </button>
+        </div>
+
+        <div className="mt-6">
+          <HomeMapLocation />
+          {/*  */}
+          <p className="mt-1 text-xs">
+            *Klik ikon untuk melihat dari Google Maps
+          </p>
+        </div>
       </div>
 
-      <Link
-        href="#calendar"
-        className="mt-6 btn bg-orange-500 w-full border-0 text-white text-lg hover:bg-orange-700"
-      >
+      <button className="md:hidden mt-8 btn bg-orange-500 w-full border-0 text-white text-lg hover:bg-orange-400 focus:bg-orange-600 md:mt-12">
         Pesan Tiket Sekarang
-      </Link>
+      </button>
 
       <Calendar />
     </div>
