@@ -53,7 +53,7 @@ export default function Home() {
         keindahan alamnya yang memukau. Pantai Marina dikelilingi oleh pasir
         halus, air laut yang transparan, serta pemandangan pegunungan yang
         menawan. Keindahan alam yang luar biasa ini menciptakan suasana damai
-        dan menenangkan bagi para pengunjungnya. (jadwal tidak dihilangkan)
+        dan menenangkan bagi para pengunjungnya.
       </p>
 
       <p className="mt-6 text-justify font-medium">

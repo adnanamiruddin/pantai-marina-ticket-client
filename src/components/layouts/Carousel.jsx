@@ -30,13 +30,6 @@ export default function Carousel() {
         prevSlide={"slide3"}
         nextSlide={"slide5"}
       />
-
-      <CarouselItem
-        slide={"slide5"}
-        image="/carousel_image5.png"
-        prevSlide={"slide4"}
-        nextSlide={"slide1"}
-      />
     </div>
   );
 }
