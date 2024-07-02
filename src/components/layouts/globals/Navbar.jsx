@@ -2,25 +2,37 @@ import { auth } from "@/api/config/firebase.config";
 import { selectUser, setUser } from "@/redux/features/userSlice";
 import Image from "next/image";
 import Link from "next/link";
-import { IoMenu } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { FaTicketAlt } from "react-icons/fa";
-import { FiLogOut } from "react-icons/fi";
-import { FaHome } from "react-icons/fa";
 import { useRouter } from "next/router";
-import { GiConfirmed } from "react-icons/gi";
+import { IoMenu } from "react-icons/io5";
+import { IoHomeOutline } from "react-icons/io5";
+import { FiLogOut } from "react-icons/fi";
+import { HiOutlineDocumentReport } from "react-icons/hi";
+import { IoIosTimer } from "react-icons/io";
+import { MdOutlineCancel } from "react-icons/md";
+import { BsTicketDetailed } from "react-icons/bs";
 
 const loggedInLinks = [
   {
     href: "/admin",
     label: "Laporan Pengunjung",
-    icon: <FaTicketAlt className="text-2xl me-1" />,
+    icon: <HiOutlineDocumentReport className="text-2xl me-1" />,
+  },
+  {
+    href: "/admin/ticket-list",
+    label: "Daftar Tiket",
+    icon: <BsTicketDetailed className="text-2xl me-1" />,
   },
   {
     href: "/admin/confirm-ticket",
-    label: "Konfirmasi Tiket",
-    icon: <GiConfirmed className="text-2xl me-1" />,
+    label: "Menunggu Konfirmasi",
+    icon: <IoIosTimer className="text-2xl me-1" />,
+  },
+  {
+    href: "/admin/cancel-ticket",
+    label: "Belum Dibayar",
+    icon: <MdOutlineCancel className="text-2xl me-1" />,
   },
 ];
 
@@ -46,7 +58,7 @@ export default function Navbar() {
   };
 
   return (
-    <div className="bg-white px-6 py-3 flex justify-between items-center fixed w-full shadow-lg z-50">
+    <div className="bg-white px-6 py-3 flex justify-between items-center fixed w-full shadow-lg z-[999]">
       <Image
         src="/logo_with_text.png"
         alt="Logo Pantai Marina"
@@ -88,7 +100,7 @@ export default function Navbar() {
                   router.pathname === "/" ? "bg-orange-400" : ""
                 }`}
               >
-                <FaHome className="text-2xl me-1" />
+                <IoHomeOutline className="text-2xl me-1" />
                 Beranda
               </Link>
             </li>

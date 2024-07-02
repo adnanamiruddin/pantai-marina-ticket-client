@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import usersApi from "@/api/modules/users.api";
-import Navbar from "./layouts/Navbar";
 import { setUser } from "@/redux/features/userSlice";
 import { ToastContainer } from "react-toastify";
-import Footer from "@/components/layouts/Footer";
+import Navbar from "@/components/layouts/globals/Navbar";
+import Footer from "@/components/layouts/globals/Footer";
 import Carousel from "./layouts/Carousel";
 
 import "react-toastify/dist/ReactToastify.css";
@@ -18,15 +18,12 @@ export default function MainLayout({ children }) {
 
   useEffect(() => {
     const authUser = async () => {
-      if (localStorage.getItem("actkn")) {
-        const { response, error } = await usersApi.getProfile();
-        if (response) dispatch(setUser(response));
-        if (error) dispatch(setUser(null));
-      } else {
-        dispatch(setUser(null));
-      }
+      const { response, error } = await usersApi.getProfile();
+      if (response) dispatch(setUser(response));
+      if (error) dispatch(setUser(null));
     };
-    authUser();
+    if (localStorage.getItem("actkn")) authUser();
+    else dispatch(setUser(null));
   }, [dispatch]);
 
   useEffect(() => {

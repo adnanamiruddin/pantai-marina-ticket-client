@@ -14,6 +14,8 @@ import { id } from "date-fns/locale";
 export default function BuyerDataModal({
   adulTicketCount,
   childTicketCount,
+  carCount,
+  motorcycleCount,
   selectedDate,
 }) {
   const router = useRouter();
@@ -41,7 +43,13 @@ export default function BuyerDataModal({
       const { response, error } = await ticketsApi.bookTickets({
         adultCount: adulTicketCount,
         childCount: childTicketCount,
-        totalPrice: adulTicketCount * 10000 + childTicketCount * 5000,
+        carCount,
+        motorcycleCount,
+        totalPrice:
+          adulTicketCount * 10000 +
+          childTicketCount * 5000 +
+          carCount * 3000 +
+          motorcycleCount * 2000,
         visitDate: selectedDate,
         buyerName: values.name,
         buyerPhoneNumber: values.phoneNumber,
@@ -61,6 +69,8 @@ export default function BuyerDataModal({
               }),
               adultCount: adulTicketCount,
               childCount: childTicketCount,
+              carCount,
+              motorcycleCount,
               totalPrice: formatRupiah(
                 adulTicketCount * 10000 + childTicketCount * 5000
               ),

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { selectUser } from "@/redux/features/userSlice";
 import { useRouter } from "next/router";
-import GlobalLoading from "../layouts/GlobalLoading";
+import GlobalLoading from "../layouts/globals/GlobalLoading";
 
 export default function ProtectedPage({ children }) {
   const router = useRouter();

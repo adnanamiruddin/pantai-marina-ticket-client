@@ -1,5 +1,5 @@
 import ticketsApi from "@/api/modules/tickets.api";
-import GlobalLoading from "@/components/layouts/GlobalLoading";
+import GlobalLoading from "@/components/layouts/globals/GlobalLoading";
 import AdminPage from "@/components/utils/AdminPage";
 import ProtectedPage from "@/components/utils/ProtectedPage";
 import { format } from "date-fns";

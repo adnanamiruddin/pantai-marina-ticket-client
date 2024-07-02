@@ -3,19 +3,26 @@ import publicClient from "../clients/public.client";
 
 const ticketsEndpoint = {
   tickets: "/tickets",
+  ticketByTicketId: ({ ticketId }) => `/tickets/${ticketId}`,
+
   timetables: "/tickets/timetables",
-  payTicketByTicketId: ({ ticketId }) => `/tickets/pay/${ticketId}`,
+  visitorReports: "/tickets/visitor-reports",
   ticketIdByBookingCode: ({ bookingCode }) =>
     `/tickets/booking-code/${bookingCode}`,
-  ticketByTicketId: ({ ticketId }) => `/tickets/${ticketId}`,
-  userTickets: "/tickets/user-tickets",
-  visitorReports: "/tickets/visitor-reports",
+
+  cancelTicketByTicketId: ({ ticketId }) => `/tickets/cancel/${ticketId}`,
+  paidTickets: "/tickets/paid-tickets",
+  payTicketByTicketId: ({ ticketId }) => `/tickets/pay/${ticketId}`,
+  confirmPaymentByTicketId: ({ ticketId }) => `/tickets/confirm/${ticketId}`,
+  pendingTickets: "/tickets/pending-tickets",
 };
 
 const ticketsApi = {
   bookTickets: async ({
     adultCount,
     childCount,
+    carCount,
+    motorcycleCount,
     totalPrice,
     visitDate,
     buyerName,
@@ -26,6 +33,8 @@ const ticketsApi = {
       const response = await publicClient.post(ticketsEndpoint.tickets, {
         adultCount,
         childCount,
+        carCount,
+        motorcycleCount,
         totalPrice,
         visitDate,
         buyerName,
@@ -38,9 +47,9 @@ const ticketsApi = {
     }
   },
 
-  getAllTimeTables: async () => {
+  getAllTickets: async () => {
     try {
-      const response = await publicClient.get(ticketsEndpoint.timetables);
+      const response = await publicClient.get(ticketsEndpoint.tickets);
       return { response };
     } catch (error) {
       return { error };
@@ -58,16 +67,30 @@ const ticketsApi = {
     }
   },
 
-  payForTicketByTicketId: async ({ ticketId, ticketName, price, quantity }) => {
+  deleteTicket: async ({ ticketId }) => {
     try {
-      const response = await publicClient.post(
-        ticketsEndpoint.payTicketByTicketId({ ticketId }),
-        {
-          ticketName,
-          price,
-          quantity,
-        }
+      const response = await publicClient.delete(
+        ticketsEndpoint.ticketByTicketId({ ticketId })
       );
+      return { response };
+    } catch (error) {
+      return { error };
+    }
+  },
+
+  //
+  getAllTimeTables: async () => {
+    try {
+      const response = await publicClient.get(ticketsEndpoint.timetables);
+      return { response };
+    } catch (error) {
+      return { error };
+    }
+  },
+
+  getVisitorReports: async () => {
+    try {
+      const response = await privateClient.get(ticketsEndpoint.visitorReports);
       return { response };
     } catch (error) {
       return { error };
@@ -85,33 +108,10 @@ const ticketsApi = {
     }
   },
 
-  updateTicketStatus: async ({ ticketId, status }) => {
-    try {
-      const response = await publicClient.put(
-        ticketsEndpoint.ticketByTicketId({ ticketId }),
-        {
-          status,
-        }
-      );
-      return { response };
-    } catch (error) {
-      return { error };
-    }
-  },
-
-  getAllTickets: async () => {
-    try {
-      const response = await publicClient.get(ticketsEndpoint.tickets);
-      return { response };
-    } catch (error) {
-      return { error };
-    }
-  },
-
   cancelTicket: async ({ ticketId }) => {
     try {
-      const response = await publicClient.delete(
-        ticketsEndpoint.ticketByTicketId({ ticketId })
+      const response = await privateClient.put(
+        ticketsEndpoint.cancelTicketByTicketId({ ticketId })
       );
       return { response };
     } catch (error) {
@@ -119,9 +119,41 @@ const ticketsApi = {
     }
   },
 
-  getVisitorReports: async () => {
+  getPaidTickets: async () => {
     try {
-      const response = await privateClient.get(ticketsEndpoint.visitorReports);
+      const response = await privateClient.get(ticketsEndpoint.paidTickets);
+      return { response };
+    } catch (error) {
+      return { error };
+    }
+  },
+
+  payForTicket: async ({ ticketId, proofOfPaymentURL }) => {
+    try {
+      const response = await publicClient.put(
+        ticketsEndpoint.payTicketByTicketId({ ticketId }),
+        { proofOfPaymentURL }
+      );
+      return { response };
+    } catch (error) {
+      return { error };
+    }
+  },
+
+  confirmTicket: async ({ ticketId }) => {
+    try {
+      const response = await privateClient.put(
+        ticketsEndpoint.confirmPaymentByTicketId({ ticketId })
+      );
+      return { response };
+    } catch (error) {
+      return { error };
+    }
+  },
+
+  getPendingTicketsOverOneHour: async () => {
+    try {
+      const response = await privateClient.get(ticketsEndpoint.pendingTickets);
       return { response };
     } catch (error) {
       return { error };

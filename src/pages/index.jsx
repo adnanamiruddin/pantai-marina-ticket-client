@@ -33,7 +33,7 @@ export default function Home() {
           isBefore(zonedTicketExpirationTime, zonedDate) &&
           ticket.status === "pending"
         ) {
-          await ticketsApi.cancelTicket({
+          await ticketsApi.deleteTicket({
             ticketId: ticket.id,
           });
         }
@@ -41,7 +41,7 @@ export default function Home() {
       await Promise.all(cancelPromises);
     };
 
-    if (tickets.length > 0) checkAndCancelTickets();
+    // if (tickets.length > 0) checkAndCancelTickets();
   }, [tickets]);
 
   return (

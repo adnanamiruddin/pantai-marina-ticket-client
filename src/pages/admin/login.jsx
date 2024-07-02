@@ -13,17 +13,17 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { MdErrorOutline } from "react-icons/md";
 
 export default function Login() {
+  const { user } = useSelector(selectUser);
+
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const { user } = useSelector(selectUser);
+  useEffect(() => {
+    if (user) router.push("/admin");
+  }, [user]);
 
   const [isOnRequest, setIsOnRequest] = useState(false);
   const [errorMessage, setErrorMessage] = useState(undefined);
-
-  useEffect(() => {
-    if (user) router.push("/");
-  }, [user]);
 
   const signInForm = useFormik({
     initialValues: {

@@ -8,6 +8,8 @@ import { toast } from "react-toastify";
 export default function BookTicketModal({ selectedDate }) {
   const [adulTicketCount, setAdultTicketCount] = useState(0);
   const [childTicketCount, setChildTicketCount] = useState(0);
+  const [carCount, setCarCount] = useState(0);
+  const [motorcycleCount, setMotorcycleCount] = useState(0);
 
   const handleAdultTicketCount = (type) => {
     if (type === "-" && adulTicketCount === 0) return;
@@ -21,6 +23,18 @@ export default function BookTicketModal({ selectedDate }) {
     type === "+"
       ? setChildTicketCount(childTicketCount + 1)
       : setChildTicketCount(childTicketCount - 1);
+  };
+
+  const handleCarCount = (type) => {
+    if (type === "-" && carCount === 0) return;
+    type === "+" ? setCarCount(carCount + 1) : setCarCount(carCount - 1);
+  };
+
+  const handleMotorcycleCount = (type) => {
+    if (type === "-" && motorcycleCount === 0) return;
+    type === "+"
+      ? setMotorcycleCount(motorcycleCount + 1)
+      : setMotorcycleCount(motorcycleCount - 1);
   };
 
   const formatRupiah = (angka) => {
@@ -64,7 +78,7 @@ export default function BookTicketModal({ selectedDate }) {
             <p className="font-semibold text-xl">Tiket Dewasa</p>
             <p className="text-sm">{formatRupiah(adulTicketCount * 10000)}</p>
           </div>
-
+          {/*  */}
           <div className="flex items-center text-black border-2 border-gray-300 rounded-lg gap-3">
             <button
               className="py-1 px-2 text-orange-600 border-r-2 border-gray-300 hover:text-orange-800"
@@ -87,7 +101,7 @@ export default function BookTicketModal({ selectedDate }) {
             <p className="font-semibold text-xl">Tiket Anak-Anak</p>
             <p className="text-sm">{formatRupiah(childTicketCount * 5000)}</p>
           </div>
-
+          {/*  */}
           <div className="flex items-center text-black border-2 border-gray-300 rounded-lg gap-3">
             <button
               className="py-1 px-2 text-orange-600 border-r-2 border-gray-300 hover:text-orange-800"
@@ -105,10 +119,63 @@ export default function BookTicketModal({ selectedDate }) {
           </div>
         </div>
 
+        <div className="divider divider-warning"></div>
+
+        <div className="mt-6 flex justify-between items-center">
+          <div className="flex flex-col">
+            <p className="font-semibold text-xl">Tiket Parkir Mobil</p>
+            <p className="text-sm">{formatRupiah(carCount * 3000)}</p>
+          </div>
+          {/*  */}
+          <div className="flex items-center text-black border-2 border-gray-300 rounded-lg gap-3">
+            <button
+              className="py-1 px-2 text-orange-600 border-r-2 border-gray-300 hover:text-orange-800"
+              onClick={() => handleCarCount("-")}
+            >
+              <FaMinus />
+            </button>
+            <h4 className="text-lg">{carCount}</h4>
+            <button
+              className="py-1 px-2 text-orange-600 border-l-2 border-gray-300 hover:text-orange-800"
+              onClick={() => handleCarCount("+")}
+            >
+              <FaPlus />
+            </button>
+          </div>
+        </div>
+
+        <div className="mt-6 flex justify-between items-center">
+          <div className="flex flex-col">
+            <p className="font-semibold text-xl">Tiket Parkir Motor</p>
+            <p className="text-sm">{formatRupiah(motorcycleCount * 2000)}</p>
+          </div>
+          {/*  */}
+          <div className="flex items-center text-black border-2 border-gray-300 rounded-lg gap-3">
+            <button
+              className="py-1 px-2 text-orange-600 border-r-2 border-gray-300 hover:text-orange-800"
+              onClick={() => handleMotorcycleCount("-")}
+            >
+              <FaMinus />
+            </button>
+            <h4 className="text-lg">{motorcycleCount}</h4>
+            <button
+              className="py-1 px-2 text-orange-600 border-l-2 border-gray-300 hover:text-orange-800"
+              onClick={() => handleMotorcycleCount("+")}
+            >
+              <FaPlus />
+            </button>
+          </div>
+        </div>
+
         <div className="mt-6 flex justify-between items-center">
           <p className="font-semibold text-xl">Total Pembayaran</p>
           <p className="font-semibold text-xl">
-            {formatRupiah(adulTicketCount * 10000 + childTicketCount * 5000)}
+            {formatRupiah(
+              adulTicketCount * 10000 +
+                childTicketCount * 5000 +
+                carCount * 3000 +
+                motorcycleCount * 2000
+            )}
           </p>
         </div>
 
@@ -126,6 +193,8 @@ export default function BookTicketModal({ selectedDate }) {
         <BuyerDataModal
           adulTicketCount={adulTicketCount}
           childTicketCount={childTicketCount}
+          carCount={carCount}
+          motorcycleCount={motorcycleCount}
           selectedDate={selectedDate}
         />
       </div>
