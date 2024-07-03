@@ -4,6 +4,7 @@ import ticketsApi from "@/api/modules/tickets.api";
 import { addMinutes, isBefore } from "date-fns";
 import { toZonedTime } from "date-fns-tz";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/router";
 
 const HomeMapLocation = dynamic(
   () => import("@/components/layouts/HomeMapLocation"),
@@ -13,9 +14,14 @@ const HomeMapLocation = dynamic(
 );
 
 export default function Home() {
+  const router = useRouter();
   const calendarRef = useRef(null);
 
   const [tickets, setTickets] = useState([]);
+
+  useEffect(() => {
+    if (window.performance.navigation.type === 1) router.push("/");
+  }, []);
 
   useEffect(() => {
     const fetchTickets = async () => {
