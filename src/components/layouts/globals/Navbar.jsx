@@ -36,7 +36,7 @@ const loggedInLinks = [
   },
 ];
 
-export default function Navbar() {
+export default function Navbar({ isCarouselPassed }) {
   const dispatch = useDispatch();
   const { user } = useSelector(selectUser);
 
@@ -58,7 +58,13 @@ export default function Navbar() {
   };
 
   return (
-    <div className="bg-white px-6 py-3 flex justify-between items-center fixed w-full shadow-lg z-[99999]">
+    <div
+      className={`bg-white px-6 py-3 flex justify-between items-center fixed w-full shadow-lg z-[99999] md:bg-transparent ${
+        isCarouselPassed || router.pathname !== "/"
+          ? "md:bg-white"
+          : "md:shadow-none"
+      }`}
+    >
       <Image
         src="/logo_with_text.png"
         alt="Logo Pantai Marina"
@@ -139,7 +145,13 @@ export default function Navbar() {
       {/* Mobile View END */}
 
       {/* Desktop View START */}
-      <div className="hidden md:inline-block text-black">
+      <div
+        className={`hidden md:inline-block ${
+          isCarouselPassed || router.pathname !== "/"
+            ? "text-black"
+            : "text-white"
+        }`}
+      >
         <ul className="menu menu-horizontal gap-4">
           <li>
             <Link
