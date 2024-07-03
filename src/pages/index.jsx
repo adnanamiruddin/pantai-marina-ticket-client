@@ -105,7 +105,9 @@ export default function Home() {
         Pesan Tiket Sekarang
       </button>
 
-      <Calendar />
+      <div ref={calendarRef}>
+        <Calendar />
+      </div>
       {/* </div> */}
     </div>
   );
