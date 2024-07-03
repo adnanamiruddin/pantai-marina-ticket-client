@@ -65,7 +65,7 @@ export default function Calendar() {
 
     return (
       <>
-        <div id="calendar" className="grid grid-cols-7">
+        <div className="grid grid-cols-7">
           {dayNames.map((dayName, index) => (
             <div
               key={index}

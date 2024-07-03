@@ -1,6 +1,5 @@
-import Link from "next/link";
 import Calendar from "../components/layouts/Calender";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ticketsApi from "@/api/modules/tickets.api";
 import { addMinutes, isBefore } from "date-fns";
 import { toZonedTime } from "date-fns-tz";
@@ -14,6 +13,8 @@ const HomeMapLocation = dynamic(
 );
 
 export default function Home() {
+  const calendarRef = useRef(null);
+
   const [tickets, setTickets] = useState([]);
 
   useEffect(() => {
@@ -52,6 +53,12 @@ export default function Home() {
     // if (tickets.length > 0) checkAndCancelTickets();
   }, [tickets]);
 
+  const scrollToCalendar = () => {
+    if (calendarRef.current) {
+      calendarRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <div className="pb-4 md:px-24 md:mt-12 md:pb-10">
       <div className="md:grid grid-cols-2 gap-16">
@@ -74,7 +81,10 @@ export default function Home() {
             Cuti Bersama
           </p>
 
-          <button className="hidden md:inline-block mt-10 btn bg-orange-500 w-1/2 border-0 text-white text-lg hover:bg-orange-400 focus:bg-orange-600">
+          <button
+            onClick={scrollToCalendar}
+            className="hidden md:inline-block mt-10 btn bg-orange-500 w-1/2 border-0 text-white text-lg hover:bg-orange-400 focus:bg-orange-600"
+          >
             Pesan Tiket Sekarang
           </button>
         </div>
@@ -88,11 +98,15 @@ export default function Home() {
         </div>
       </div>
 
-      <button className="md:hidden mt-8 btn bg-orange-500 w-full border-0 text-white text-lg hover:bg-orange-400 focus:bg-orange-600 md:mt-12">
+      <button
+        onClick={scrollToCalendar}
+        className="md:hidden mt-8 btn bg-orange-500 w-full border-0 text-white text-lg hover:bg-orange-400 focus:bg-orange-600 md:mt-12"
+      >
         Pesan Tiket Sekarang
       </button>
 
       <Calendar />
+      {/* </div> */}
     </div>
   );
 }

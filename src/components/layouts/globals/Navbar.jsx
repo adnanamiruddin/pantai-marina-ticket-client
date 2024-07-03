@@ -68,8 +68,8 @@ export default function Navbar({ isCarouselPassed }) {
       <Image
         src="/logo_with_text.png"
         alt="Logo Pantai Marina"
-        width={100}
-        height={100}
+        width={500}
+        height={500}
         className="w-[60%] md:w-[20%]"
       />
 
@@ -95,8 +95,8 @@ export default function Navbar({ isCarouselPassed }) {
             <Image
               src="/logo_with_text.png"
               alt="Logo Pantai Marina"
-              width={100}
-              height={100}
+              width={500}
+              height={500}
               className="w-[70%] ms-2 mb-3"
             />
             <li>

@@ -1,10 +1,4 @@
 import Image from "next/image";
-import {
-  FaFacebookF,
-  FaTwitter,
-  FaLinkedinIn,
-  FaInstagram,
-} from "react-icons/fa";
 
 export default function Footer() {
   return (
@@ -13,8 +7,8 @@ export default function Footer() {
         <Image
           src="/logo.png"
           alt="Logo Pantai Marina"
-          width={100}
-          height={100}
+          width={500}
+          height={500}
           className="w-10 h-10"
         />
 
