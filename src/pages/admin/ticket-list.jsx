@@ -3,6 +3,7 @@ import GlobalLoading from "@/components/layouts/globals/GlobalLoading";
 import NotFound from "@/components/layouts/globals/NotFound";
 import BuyerTicketDataModal from "@/components/layouts/modals/BuyerTicketDataModal";
 import ShowProofOfPaymentModal from "@/components/layouts/modals/ShowProofOfPaymentModal";
+import SearchBar from "@/components/layouts/SearchBar";
 import TicketItem from "@/components/layouts/TicketItem";
 import AdminPage from "@/components/utils/AdminPage";
 import ProtectedPage from "@/components/utils/ProtectedPage";
@@ -12,6 +13,9 @@ export default function TicketList() {
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [tickets, setTickets] = useState([]);
   const [selectedTicketId, setSelectedTicketId] = useState(null);
+
+  const [filteredTickets, setFilteredTickets] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const fetchAllTickets = async () => {
@@ -31,16 +35,41 @@ export default function TicketList() {
     fetchAllTickets();
   }, []);
 
+  useEffect(() => {
+    const filterTickets = () => {
+      let filtered = tickets;
+      //
+      if (searchQuery !== "") {
+        filtered = filtered.filter((ticket) =>
+          ticket.bookingCode.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+      }
+      //
+      setFilteredTickets(filtered);
+    };
+    //
+    filterTickets();
+  }, [searchQuery, tickets]);
+
   return (
     <ProtectedPage>
       <AdminPage>
         {isDataLoaded ? (
           <div className="pb-10 md:mx-16 md:mt-10">
-            <h1 className="text-3xl font-bold">Daftar Tiket</h1>
+            <div className="flex justify-between items-center">
+              <h1 className="w-1/2 text-3xl font-bold">Daftar Tiket</h1>
 
-            {tickets.length > 0 ? (
+              <div className="w-1/3">
+                <SearchBar
+                  searchQuery={searchQuery}
+                  setSearchQuery={setSearchQuery}
+                />
+              </div>
+            </div>
+
+            {filteredTickets.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-6">
-                {tickets.map((ticket, i) => (
+                {filteredTickets.map((ticket, i) => (
                   <TicketItem
                     key={i}
                     ticket={ticket}
