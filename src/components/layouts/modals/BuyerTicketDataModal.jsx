@@ -1,10 +1,13 @@
 import ticketsApi from "@/api/modules/tickets.api";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { FaRegTrashAlt } from "react-icons/fa";
 
 export default function BuyerTicketDataModal({
   ticketId,
   setSelectedTicketId,
+  handleDeleteTicketButtonClicked,
+  ticketStatus,
 }) {
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [ticket, setTicket] = useState(null);
@@ -80,6 +83,20 @@ export default function BuyerTicketDataModal({
                 </p>
               </div>
             </div>
+
+            {ticketStatus === "cancelled" ? (
+              <div className="mt-4 flex justify-end">
+                <button
+                  onClick={() => {
+                    handleDeleteTicketButtonClicked(ticketId);
+                  }}
+                  className="px-4 py-2 rounded-md bg-red-600 border border-red-300 text-white flex justify-center items-center gap-2"
+                >
+                  <FaRegTrashAlt className="text-white text-xl" />
+                  Hapus
+                </button>
+              </div>
+            ) : null}
           </div>
         ) : (
           <div className="mt-8 flex justify-center items-center h-32">

@@ -2,6 +2,7 @@ import ticketsApi from "@/api/modules/tickets.api";
 import GlobalLoading from "@/components/layouts/globals/GlobalLoading";
 import NotFound from "@/components/layouts/globals/NotFound";
 import BuyerTicketDataModal from "@/components/layouts/modals/BuyerTicketDataModal";
+import ConfirmDeleteTicketModal from "@/components/layouts/modals/ConfirmDeleteTicketModal";
 import ShowProofOfPaymentModal from "@/components/layouts/modals/ShowProofOfPaymentModal";
 import SearchBar from "@/components/layouts/SearchBar";
 import TicketItem from "@/components/layouts/TicketItem";
@@ -13,6 +14,8 @@ export default function TicketList() {
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [tickets, setTickets] = useState([]);
   const [selectedTicketId, setSelectedTicketId] = useState(null);
+  const [selectedTicketIdToDelete, setSelectedTicketIdToDelete] =
+    useState(null);
 
   const [filteredTickets, setFilteredTickets] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -51,15 +54,23 @@ export default function TicketList() {
     filterTickets();
   }, [searchQuery, tickets]);
 
+  const handleDeleteTicketButtonClicked = (ticketId) => {
+    console.log(ticketId);
+    setSelectedTicketIdToDelete(ticketId);
+    document.getElementById("confirm_delete_ticket_modal").showModal();
+  };
+
   return (
     <ProtectedPage>
       <AdminPage>
         {isDataLoaded ? (
           <div className="pb-10 md:mx-16 md:mt-10">
-            <div className="flex justify-between items-center">
-              <h1 className="w-1/2 text-3xl font-bold">Daftar Tiket</h1>
+            <div className="flex flex-col gap-4 md:flex-row md:justify-between md:items-center">
+              <h1 className="w-full text-3xl font-bold md:w-1/2">
+                Daftar Tiket
+              </h1>
 
-              <div className="w-1/3">
+              <div className="w-full md:w-1/3">
                 <SearchBar
                   searchQuery={searchQuery}
                   setSearchQuery={setSearchQuery}
@@ -68,7 +79,7 @@ export default function TicketList() {
             </div>
 
             {filteredTickets.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-6">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-8">
                 {filteredTickets.map((ticket, i) => (
                   <TicketItem
                     key={i}
@@ -88,6 +99,13 @@ export default function TicketList() {
             <BuyerTicketDataModal
               ticketId={selectedTicketId}
               setSelectedTicketId={setSelectedTicketId}
+              handleDeleteTicketButtonClicked={handleDeleteTicketButtonClicked}
+              ticketStatus={
+                tickets.find((t) => t.id === selectedTicketId)?.status
+              }
+            />
+            <ConfirmDeleteTicketModal
+              selectedTicketIdToDelete={selectedTicketIdToDelete}
             />
           </div>
         ) : (

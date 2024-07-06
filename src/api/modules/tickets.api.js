@@ -69,7 +69,7 @@ const ticketsApi = {
 
   deleteTicket: async ({ ticketId }) => {
     try {
-      const response = await publicClient.delete(
+      const response = await privateClient.delete(
         ticketsEndpoint.ticketByTicketId({ ticketId })
       );
       return { response };
