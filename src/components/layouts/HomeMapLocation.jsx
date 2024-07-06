@@ -7,9 +7,11 @@ export default function HomeMapLocation() {
   useEffect(() => {
     if (!mapRef.current) {
       mapRef.current = L.map("map").setView(
-        [-5.584230377265747, 120.10275419349558],
+        [-5.585001467884835, 120.1009625980594],
         13
       );
+
+      // -5.585001467884835, 120.1009625980594
 
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution:
@@ -23,7 +25,7 @@ export default function HomeMapLocation() {
         popupAnchor: [0, -50],
       });
 
-      const marker = L.marker([-5.584230377265747, 120.10275419349558], {
+      const marker = L.marker([-5.585001467884835, 120.1009625980594], {
         icon: customIcon,
       })
         .addTo(mapRef.current)
