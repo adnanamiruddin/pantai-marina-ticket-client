@@ -12,20 +12,6 @@ html {
   scroll-behavior: smooth;
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
 /* Tambahkan kode untuk styling scrollbar di sini */
 *::-webkit-scrollbar {
   width: 12px;
