@@ -14,6 +14,7 @@ import { VscTriangleRight, VscTriangleLeft } from "react-icons/vsc";
 import ticketsApi from "@/api/modules/tickets.api";
 import { toast } from "react-toastify";
 import BookTicketModal from "@/components/layouts/modals/BookTicketModal";
+import { toZonedTime } from "date-fns-tz";
 
 export default function Calendar() {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -82,7 +83,9 @@ export default function Calendar() {
                 (timetable) =>
                   isEqual(timetable.visitDate, day) && timetable.quota === 0
               );
-              const isBeforeToday = day < startOfDay(new Date());
+              const timezone = "Asia/Makassar";
+              const zonedDate = startOfDay(toZonedTime(new Date(), timezone));
+              const isBeforeToday = day < startOfDay(zonedDate);
               const buttonClass = isBeforeToday
                 ? "bg-gray-400 cursor-not-allowed"
                 : isQuotaFull
